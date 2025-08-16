@@ -1,26 +1,22 @@
 package vn.hoidanit.laptopshop.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@Table(name = "nguoi_dung")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String password;
     private String fullName;
     private String address;
     private String phone;
-
-    // Default constructor
-    public User() {
-    }
-
-    // Constructor với tất cả tham số
-    public User(long id, String email, String password, String fullName, String address, String phone) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.address = address;
-        this.phone = phone;
-    }
 
     // Getter methods
     public long getId() {
