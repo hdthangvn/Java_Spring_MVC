@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.hoidanit.laptopshop.repository.UserRepository;
-
+import java.util.List;
 import vn.hoidanit.laptopshop.service.UserService; // ← Thêm import này
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -22,7 +22,9 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        model.addAttribute("test", "test");
+        List<User> arrUsers = this.userService.getAllUsersByEmail("ducthanghoang892004@gmail.com");
+        System.out.println(arrUsers);
+        model.addAttribute("eric", "test");
         return "hello";
     }
 
