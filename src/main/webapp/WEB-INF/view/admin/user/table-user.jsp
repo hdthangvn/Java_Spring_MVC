@@ -37,10 +37,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:forEach var="user" items="${users1}">
+                                    <tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.fullName}</td>
+                                        <td style="text-align: center">
+                                            <button class="btn btn-success">View</button>
+                                            <button class="btn btn-warning">Edit</button>
+                                            <button class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 <tr>
-                                    <th>1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
+                                    <th>${user.id}</th>
+                                    <td>${user.email}</td>
+                                    <td>${user.fullName}</td>
                                     <td>
                                        <button class="btn btn-success">View</button>
                                        <button class="btn btn-warning">Edit</button>
