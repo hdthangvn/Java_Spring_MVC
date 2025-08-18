@@ -31,4 +31,9 @@ public class UserService {
         return eric;
         // Handle user saving logic here
     }
+
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
 }
