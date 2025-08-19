@@ -2,6 +2,8 @@ package vn.hoidanit.laptopshop.controller;
 
 import org.springframework.ui.Model;
 import vn.hoidanit.laptopshop.domain.User; // ← THÊM import này
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,9 @@ import vn.hoidanit.laptopshop.service.UserService; // ← Thêm import này
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -54,6 +59,32 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User hoidanit) {
         this.userService.handleSaveUser(hoidanit);
+        return "redirect:/admin/user";
+    }
+
+    // Thêm handler cho request GET đến /admin/user/{id}/edit
+    @RequestMapping("/admin/user/{id}/update")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+
+        if (currentUser == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+    }
+
+    // Thêm handler cho request POST để xử lý việc cập nhật
+    @PostMapping("/admin/user/{id}/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit) {
+        User currentUser = this.userService.getUserById(hoidanit.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(hoidanit.getAddress());
+            currentUser.setFullName(hoidanit.getFullName());
+            currentUser.setPhone(hoidanit.getPhone());
+        }
+
+        this.userService.handleSaveUser(currentUser);
         return "redirect:/admin/user";
     }
 

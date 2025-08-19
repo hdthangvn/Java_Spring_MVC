@@ -44,7 +44,7 @@
                                         <td>${user.fullName}</td>
                                         <td style="text-align: center">
                                             <a href="/admin/user/${user.id}" class="btn btn-success">View</a> <!-- mặc định thẻ a dùng method get -->
-                                            <a href="/admin/user/${user.id}/edit" class="btn btn-warning">Edit</a>
+                                            <a href="/admin/user/${user.id}/update" class="btn btn-warning">Edit</a>
                                             <a href="/admin/user/${user.id}/delete" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
