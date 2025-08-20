@@ -7,16 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import vn.hoidanit.laptopshop.repository.UserRepository;
 import java.util.List;
 import vn.hoidanit.laptopshop.service.UserService; // ← Thêm import này
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -85,6 +84,21 @@ public class UserController {
         }
 
         this.userService.handleSaveUser(currentUser);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/{id}/delete")
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        // User user = new User();
+        // user.setId(id);
+        model.addAttribute("newUser", new User()); // Tạo một đối tượng User với ID
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/{id}/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User kaito) {
+        this.userService.deleteUserById(kaito.getId());
         return "redirect:/admin/user";
     }
 
