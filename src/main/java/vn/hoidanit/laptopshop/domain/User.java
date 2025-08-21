@@ -17,6 +17,7 @@ public class User {
     private String fullName;
     private String address;
     private String phone;
+    private String avatar;
 
     // Getter methods
     public long getId() {
@@ -41,6 +42,10 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 
     // Setter methods
@@ -68,6 +73,10 @@ public class User {
         this.phone = phone;
     }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     // toString method
     @Override
     public String toString() {
@@ -78,6 +87,7 @@ public class User {
                 ", fullName='" + fullName + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }
